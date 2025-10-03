@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-// --- 1. Declarar variables y Títulos ---
+//01. Declarar los variables
 Console.WriteLine("=====================================");
 Console.WriteLine("    Calculadora de Índice de Masa Corporal (IMC)");
 Console.WriteLine("=====================================");
@@ -11,35 +11,35 @@ double estatura;
 double imc;
 string entrada;
 
-// --- 2. Obtener Peso ---
+//02. Obtener Peso
 Console.Write("Ingrese su peso en kilogramos (ej: 75.5): ");
 entrada = Console.ReadLine();
 
-// Validar entrada para Peso
+// Validar si numero (entrada)es correcto para Peso
 while (!double.TryParse(entrada, NumberStyles.Any, CultureInfo.InvariantCulture, out peso) || peso <= 0)
 {
-    Console.WriteLine("Error: Ingrese un número positivo válido para el peso.");
+    Console.WriteLine("Error: Ingresastes mal tu peso.");
     Console.Write("Ingrese su peso en kilogramos (ej: 75.5): ");
     entrada = Console.ReadLine();
 }
 
-// --- 3. Obtener Estatura ---
+//03. Obtener Estatura 
 Console.Write("Ingrese su estatura en metros (ej: 1.70): ");
 entrada = Console.ReadLine();
 
-// Validar entrada para Estatura
+// Validar numero (entrada)si es correcto para Estatura
 while (!double.TryParse(entrada, NumberStyles.Any, CultureInfo.InvariantCulture, out estatura) || estatura <= 0)
 {
-    Console.WriteLine("Error: Ingrese un número positivo válido para la estatura.");
+    Console.WriteLine("Error: No ingresastes bien tu estatura.");
     Console.Write("Ingrese su estatura en metros (ej: 1.70): ");
     entrada = Console.ReadLine();
 }
 
-// --- 4. Calcular IMC ---
+//04. Calcular IMC
 // Fórmula: peso / estatura²
 imc = peso / (estatura * estatura); 
 
-// --- 5. Determinar Estado Nutricional (Estructura Condicional) ---
+//05. Determinar Estado Nutricional (Estructuras con if-else)
 string estadoNutricional;
 
 if (imc < 18.5)
@@ -63,8 +63,8 @@ else
     estadoNutricional = "Obesidad extrema";
 }
 
-// --- 6. Mostrar Resultados ---
-Console.WriteLine("\n--- Resultado ---");
+// 6. Mostrar Resultados
+Console.WriteLine("\n-- Resultados: -");
 Console.WriteLine($"Peso: {peso:F2} kg");
 Console.WriteLine($"Estatura: {estatura:F2} m");
 Console.WriteLine($"Índice de Masa Corporal (IMC): {imc:F4} kg/m²");
