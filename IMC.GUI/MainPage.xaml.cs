@@ -2,15 +2,10 @@
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
-
         public MainPage()
         {
             InitializeComponent();
-            PesoEntry.Text = string.Empty;
-            EstaturaEntry.Text = string.Empty;
-            ImcLabel.Text = string.Empty;
-            SituacionNutricionalLabel.Text = string.Empty
+            LimpiarInformacion();
         }
 
         private void OnCalcularButtonClicked(object sender, EventArgs e)
@@ -18,43 +13,51 @@
             decimal peso = Convert.ToDecimal(PesoEntry.Text);
             decimal estatura = Convert.ToDecimal(EstaturaEntry.Text);
             decimal IMC = peso / (estatura * estatura);
-            ImcLabel.Text = IMC.ToString("G6");
+            ImcLable.Text = IMC.ToString("G6");
             SituacionNutricionalLabel.Text = DeterminaEstadoNutricional(IMC);
         }
 
         private void OnLimpiarButtonClicked(object sender, EventArgs e)
         {
+            LimpiarInformacion();
+
+        }
+        private void LimpiarInformacion(object sender, EventArgs)
+        {
             PesoEntry.Text = string.Empty;
             EstaturaEntry.Text = string.Empty;
             ImcLabel.Text = string.Empty;
-            SituacionNutricionalLabel.Text = string.Empty
+            SituacionNutricionalLabel.Text = string.Empty;
         }
-        private decimal IndiceMasaCorporal (decimal peso, decimal estatura)
+        private decimal IndiceMasaCorporal(decimal peso, decimal estatura)
         {
             return peso / (estatura * estatura);
         }
-        
-        private string DeterminaEstadoNutricional (decimal IMC)
-        if (IMC < 18.5m)
+
+        private string DeterminaEstadoNutricional(decimal IMC)
         {
-            return "Peso Bajo";
+            if (IMC < 18.5m)
+            {
+                return "Peso Bajo";
+            }
+            if (IMC < 25.00m)
+            {
+                return "Peso Normal";
+            }
+            if (IMC < 30.00m)
+            {
+                return "Sobrepeso";
+            }
+            if (IMC < 40.00m)
+            {
+                return "Obesidad";
+            }
+            else
+            {
+                return "Obesidad Extrema";
+            }
+
         }
-        if (IMC < 25.00m)
-        {
-            return "Peso Normal";
-        }
-        if (IMC < 30.00m)
-        {
-            return "Sobrepeso";
-        }
-        if (IMC < 40.00m)
-        {
-            return "Obesidad";
-        }
-        else
-        {
-            return "Obesidad Extrema";
-        } 
         
     }
 }
