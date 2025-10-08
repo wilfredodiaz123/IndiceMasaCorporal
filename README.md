@@ -1,0 +1,1 @@
+Este repositorio consiste de 2 proyectos. Los 2 son calculadoras de Indice de Masa Corporal, pero uno es desde consola y el otro y tiene interfaze de usario. Hecho en Ubuntu (Linux) con una computadora de 2015 :)
