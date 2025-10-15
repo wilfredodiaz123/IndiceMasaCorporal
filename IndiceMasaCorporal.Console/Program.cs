@@ -1,72 +1,25 @@
-﻿using System;
-using System.Globalization;
+﻿using IMC.Model;
 
-//01. Declarar los variables
-Console.WriteLine("=====================================");
-Console.WriteLine("    Calculadora de Índice de Masa Corporal (IMC)");
-Console.WriteLine("=====================================");
+Console.WriteLine("Aplicación que calcula el indice de masa corporal de una persona\n");
 
-double peso;
-double estatura;
-double imc;
-string entrada;
+decimal peso =
+    ReadDecimal("Proporcion el peso en kilogramos de la persona: ");
 
-//02. Obtener Peso
-Console.Write("Ingrese su peso en kilogramos (ej: 75.5): ");
-entrada = Console.ReadLine();
+decimal estatura =
+    ReadDecimal("Proporcion la estatura en metros de la persona: ");
 
-// Validar si numero (entrada)es correcto para Peso
-while (!double.TryParse(entrada, NumberStyles.Any, CultureInfo.InvariantCulture, out peso) || peso <= 0)
+decimal imc = IndiceDeMasaCorporalLib.IndiceMasaCorporal(peso, estatura);
+
+Console.WriteLine(
+    $"El índice de masa coporal de la persona es: {imc:G6}");
+Console.WriteLine(
+    $"El estado nutricional de la persona es: {IndiceDeMasaCorporalLib.DeterminaEstadoNutricional(imc)}");
+
+Console.WriteLine();
+
+static decimal ReadDecimal(string indicacion)
 {
-    Console.WriteLine("Error: Ingresastes mal tu peso.");
-    Console.Write("Ingrese su peso en kilogramos (ej: 75.5): ");
-    entrada = Console.ReadLine();
+    Console.Write(indicacion);
+    var entradaComoTexto = Console.ReadLine();
+    return Convert.ToDecimal(entradaComoTexto);
 }
-
-//03. Obtener Estatura 
-Console.Write("Ingrese su estatura en metros (ej: 1.70): ");
-entrada = Console.ReadLine();
-
-// Validar numero (entrada)si es correcto para Estatura
-while (!double.TryParse(entrada, NumberStyles.Any, CultureInfo.InvariantCulture, out estatura) || estatura <= 0)
-{
-    Console.WriteLine("Error: No ingresastes bien tu estatura.");
-    Console.Write("Ingrese su estatura en metros (ej: 1.70): ");
-    entrada = Console.ReadLine();
-}
-
-//04. Calcular IMC
-// Fórmula: peso / estatura²
-imc = peso / (estatura * estatura); 
-
-//05. Determinar Estado Nutricional (Estructuras con if-else)
-string estadoNutricional;
-
-if (imc < 18.5)
-{
-    estadoNutricional = "Peso bajo";
-}
-else if (imc < 25.0)
-{
-    estadoNutricional = "Peso normal";
-}
-else if (imc < 30.0)
-{
-    estadoNutricional = "Sobrepeso";
-}
-else if (imc < 40.0)
-{
-    estadoNutricional = "Obesidad";
-}
-else
-{
-    estadoNutricional = "Obesidad extrema";
-}
-
-// 6. Mostrar Resultados
-Console.WriteLine("\n-- Resultados: -");
-Console.WriteLine($"Peso: {peso:F2} kg");
-Console.WriteLine($"Estatura: {estatura:F2} m");
-Console.WriteLine($"Índice de Masa Corporal (IMC): {imc:F4} kg/m²");
-Console.WriteLine($"Estado Nutricional: {estadoNutricional}");
-Console.WriteLine("-----------------\n");
